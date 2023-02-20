@@ -1,66 +1,114 @@
-// obj literal
-const jeisson = {
-    //argumentos
-    name: 'jeisson',
-    userName: 'JeissonR115',
-    age: 18,
-    approvedCourses: [],
-    //metodo
-    passCourse(newCourse) {
-        this.approvedCourses.push(newCourse)
-    }
-};
-
-// prototipo
-function Student(name, userName,  age, approvedCourses){
-    //argumentos
-    this.name= name
-    this.userName= userName
-    this.age=age
-    this.approvedCourses= approvedCourses
-}
-    //metodo
-    Student.prototype.approvedCourses = function(newCourse) {
-        this.approvedCourses.push(newCourse)
-    }
-
-// instancia de prototipo ('objet')
-const daniel = new Student('Daniel','Bananen',13,['Desarrollo de videojuegos','introduccion a gameMaker'])
-
-
-// clases (prototipo con sintaxix distinta)
-class Student2{
-    constructor(name, userName,  age, approvedCourses){
-        this.name= name
-        this.userName= userName
-        this.age=age
-        this.approvedCourses= approvedCourses
-    }
-    approvedCourses(newCourse){
-        this.approvedCourses.push(newCourse)
+class Student{
+    constructor({  
+        name,
+        age,
+        email,
+        twitter = undefined,
+        instagram= undefined,
+        facebook = undefined,
+        approvedCourses = [],
+        learnigPaths =[],
+    })
+    {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.socialMedia = {
+            twitter:twitter,
+            instagram: instagram,
+            facebook: facebook,
+        }
+        this.approvedCourses = approvedCourses = [];
+        this.learnigPaths = learnigPaths =[];
     }
 }
-const migel = new Student2('migel','m!g31',29,['Analisis de Negosios para la ciencia de datos','Redes informaticas de internet'])
-
-//obj literal como parametro en el constructor
-class Student3{
-    constructor({name, userName,  age, approvedCourses,email,twitter}){
-        this.name= name
-        this.userName= userName
-        this.age=age
-        this.email = email
-        this.approvedCourses= approvedCourses
-        this.twitter= twitter
-
-    }
-    approvedCourses(newCourse){
-        this.approvedCourses.push(newCourse)
+class LearnigPath{
+    constructor({
+        name,
+        courses,
+        category,
+    }){
+        this.name = name ;
+        this.courses = courses ;
+        this.category = category ;
     }
 }
-const angel = new Student3({
-    name: 'angel',
-    userName:'angelol',  
-    age: 7,
-    email:"angelortiz1129@gmail.com",
-    approvedCourses:['Proyectos Creativos para Niñas y Niños','Básico de JavaScript']
+class Course{
+    constructor({        
+        name,
+        teacher,
+        classes}){
+            this.name = name;
+            this.teacher = teacher;
+            this.classes = classes;
+    }
+
+}
+
+const courseFrontendDev = new Course({
+    name:'Frontend Developer',
+    teacher:'Estefany Aguilar',
+    classes: []
+})
+const courseJSPoo = new Course({
+    name:'Básico de Programación Orientada a Objetos con JavaScript',
+    teacher:'Juan David Castro Gallego',
+    classes: []
+})
+const courseDataEngineeringFundamentals = new Course({
+    name:'Fundamentos de Ingeniería de Datos',
+    teacher:'Ricardo Alanís',
+    classes: []
+})
+const courseTerminal = new Course({
+    name:'Introducción a la Terminal y Línea de Comandos',
+    teacher:'Enrique Devars',
+    classes: []
+})
+const courseDatabase= new Course({
+    name:'Fundamentos de Bases de Datos',
+    teacher:'Israel Vázquez Morales',
+    classes: []
+})
+const courseDefinitiveHTMLCSS = new Course({
+    name:'Definitivo de HTML y CSS',
+    teacher:'Diego De Granda',
+    classes: []
+})
+
+const schoolWeb = new LearnigPath({
+    name:'Desarrollo web',
+    courses:[
+        courseJSPoo,
+        courseDefinitiveHTMLCSS,
+        courseFrontendDev,
+        courseTerminal
+    ],
+    category:'Development and Engineering',
+})
+const schoolData = new LearnigPath({
+    name:'Data Science e Inteligencia Artificial',
+    courses:[
+        courseTerminal,
+        courseDatabase,
+        courseDataEngineeringFundamentals
+    ],
+    category:'Development and Engineering',
+})
+const schoolVideoGames = new LearnigPath({
+    name:'Videoluegos',
+    courses:[
+        courseTerminal
+    ],
+    category:'Development and Engineering',
+})
+
+const Jeisson = new Student({
+    name:'jeisson',
+    age:15,
+    email:'jeissonfr@gmail.com',
+    learnigPaths:[
+        schoolData,
+        schoolWeb,
+    ]
 })
