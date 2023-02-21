@@ -44,6 +44,16 @@ class Course{
     }
 
 }
+class Class{
+    constructor({
+        name,
+        video,
+    }){
+        this.name = name
+        this.video = video
+
+    }
+}
 
 const courseFrontendDev = new Course({
     name:'Frontend Developer',
@@ -102,7 +112,6 @@ const schoolVideoGames = new LearnigPath({
     ],
     category:'Development and Engineering',
 })
-
 const Jeisson = new Student({
     name:'jeisson',
     age:15,
