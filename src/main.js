@@ -1,3 +1,12 @@
+function videoPlay(id){
+    const url = "https//:"+ id
+    console.log("se esta reproduciendo "+ url)
+}
+function videoStop(id){
+    const url = "https//:"+ id
+    console.log("se estapausando "+ url)
+}
+
 class Student{
     constructor({  
         name,
@@ -22,6 +31,40 @@ class Student{
         this.learnigPaths = learnigPaths =[];
     }
 }
+class FreeStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+
+    approvedCourse(newCourse){
+        if(newCourse.isFree){
+            this.approvedCourses.push(newCourse)
+        }else{
+            console.warn(`lo siento ${this.name} tienes que conseguir un plan basico o expert`)
+        }
+    }
+
+}
+class BasicStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+    approvedCourse(newCourse){
+        if(newCourse.lag !== "english" ){
+            this.approvedCourses.push(newCourse)
+        }else{
+            console.warn(`lo siento ${this.name} tienes que conseguir un plan expert`)
+        }
+    }
+}
+class EspertStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+    approvedCourse(newCourse){this.approvedCourses.push(newCourse)}
+}
+
+
 class LearnigPath{
     constructor({
         name,
@@ -37,21 +80,31 @@ class Course{
     constructor({        
         name,
         teacher,
-        classes}){
+        classes = [],
+        isFree = false,
+        lag="spanish"
+    }){
             this.name = name;
             this.teacher = teacher;
             this.classes = classes;
+            this.isFree = isFree;
+            this.lag = lag;
     }
 
 }
 class Class{
     constructor({
         name,
-        video,
+        videoID,
     }){
         this.name = name
-        this.video = video
-
+        this.videoID = videoID
+    }
+    play(){
+        videoPlay(this.videoID);
+    }
+    stop(){
+        videoStop(this.videoID)
     }
 }
 
@@ -73,17 +126,22 @@ const courseDataEngineeringFundamentals = new Course({
 const courseTerminal = new Course({
     name:'Introducción a la Terminal y Línea de Comandos',
     teacher:'Enrique Devars',
-    classes: []
+    classes: [],
+    isFree:true,
+    lag:"english",
+
 })
 const courseDatabase= new Course({
     name:'Fundamentos de Bases de Datos',
     teacher:'Israel Vázquez Morales',
-    classes: []
+    classes: [],
+
 })
 const courseDefinitiveHTMLCSS = new Course({
     name:'Definitivo de HTML y CSS',
     teacher:'Diego De Granda',
-    classes: []
+    classes: [],
+    isFree:true,
 })
 
 const schoolWeb = new LearnigPath({
@@ -112,12 +170,22 @@ const schoolVideoGames = new LearnigPath({
     ],
     category:'Development and Engineering',
 })
-const Jeisson = new Student({
+
+
+const Jeisson = new FreeStudent({
     name:'jeisson',
     age:15,
     email:'jeissonfr@gmail.com',
     learnigPaths:[
         schoolData,
         schoolWeb,
+    ]
+})
+const migel = new BasicStudent({
+    name:'migel',
+    age:5,
+    email:'jeissonfr@gmail.com',
+    learnigPaths:[
+        schoolVideoGames,
     ]
 })
