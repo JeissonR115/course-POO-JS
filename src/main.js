@@ -7,6 +7,8 @@ function videoStop(id){
     console.log("se estapausando "+ url)
 }
 
+
+
 class Student{
     constructor({  
         name,
@@ -27,8 +29,16 @@ class Student{
             instagram: instagram,
             facebook: facebook,
         }
-        this.approvedCourses = approvedCourses = [];
-        this.learnigPaths = learnigPaths =[];
+        this.approvedCourses = approvedCourses ;
+        this.learnigPaths = learnigPaths;
+    }
+
+    postComment(commentContent){
+        const comment = new Comment({
+            content: commentContent,
+            name:this.name,
+        })
+        comment.post()
     }
 }
 class FreeStudent extends Student{
@@ -62,6 +72,20 @@ class EspertStudent extends Student{
         super(props)
     }
     approvedCourse(newCourse){this.approvedCourses.push(newCourse)}
+}
+class TeacherStudent extends Student{
+    constructor(props){
+        super(props)
+    }
+    approvedCourse(newCourse){this.approvedCourses.push(newCourse)}
+    postComment(commentContent){
+        const comment = new Comment({
+            content: commentContent,
+            name:this.name,
+            role:"teacher"
+        })
+        comment.post()
+    }
 }
 
 
@@ -108,6 +132,25 @@ class Class{
     }
 }
 
+
+class Comment {
+    constructor({
+        content,
+        name,
+        role = "student"
+    })
+    {
+        this.content=content;
+        this.name=name;
+        this.role=role;
+        this.likes = 0;
+    }
+    post(){
+        console.log(`${this.name} (${this.role})`)
+        console.log(`${this.likes}💚`);
+        console.log(this.content)
+    }
+}
 const courseFrontendDev = new Course({
     name:'Frontend Developer',
     teacher:'Estefany Aguilar',
@@ -187,5 +230,17 @@ const migel = new BasicStudent({
     email:'jeissonfr@gmail.com',
     learnigPaths:[
         schoolVideoGames,
+    ]
+})
+const freddy = new TeacherStudent({
+    name:'Freddy Vega',
+    age: 36,
+    email:'freddy@gmail.com',
+    twitter:'freddier',
+    instagram:'freddier',
+    learnigPaths:[
+        schoolVideoGames,
+        schoolData,
+        schoolWeb
     ]
 })
